@@ -2,12 +2,12 @@
 
 export class DataStore{
   constructor(){
-    console.log("创建一个变量池");
+    // console.log("创建了一个变量池");
     this.map = new Map();
   }
-  // 使用单例模式创建变量池,保证所以类获取到的变量池都是同一个
-  // 这样可以保证所有类的数据都是从相同的变量池中取的
-  // static修饰的方法不能通过实力对象访问,只能通过类访问
+  // 使用单例模式创建变量池,保证所有类获取到的变量池都是同一个
+  // 这样可以保证所有类取到的数据都是从相同的变量池中取的
+  // static修饰的方法不能通过实例对象访问,只能通过类访问
   static getInstance(){
     if(!DataStore.instance){ // 如果instance不存在
       // 创建一个新的DataStore对象,绑定上去
@@ -26,7 +26,11 @@ export class DataStore{
     return this.map.get(key);
   }
   // 销毁数据
-  destory(){
+  destroy(){
     this.map.clear();
   }
 }
+
+
+
+
