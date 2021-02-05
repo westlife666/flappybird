@@ -1,6 +1,7 @@
 // 导演类,控制游戏的逻辑
 
 import { DataStore } from "./base/DataStore";
+import { boom, go } from "./music";
 import { DownPipe } from "./runtime/DownPipe";
 import { UpPipe } from "./runtime/UpPipe";
 
@@ -94,8 +95,9 @@ export class Director{
     if(birds.birdsX[0]>pipes[0].x+pipes[0].w && score.canAdd){
       // 小鸟的左边超过水管的右边
       score.scoreNumber++;
-      // 加了一次分之后,就不能再加分
+      // 加了一次分之后,就不能再继续加分了
       score.canAdd = false;
+      // go();
     }
   }
 
@@ -130,6 +132,7 @@ export class Director{
       this.dataStore.get("land").draw();
       this.id = requestAnimationFrame(()=>this.run())
     }else{ // 游戏结束
+      boom();
       cancelAnimationFrame(this.id);
       // 重绘图片,解决贴图错乱的问题
       this.dataStore.get("background").draw();
